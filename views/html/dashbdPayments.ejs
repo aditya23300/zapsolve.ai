@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>zapsolve</title>
+    <link rel="stylesheet" href="../css/dashbdPayments.css" />
+  </head>
+  <body>
+    <nav class="navbar">
+      <div class="navbar-container">
+        <div class="logo">
+          <img
+            src="../pics/zapsolve.ai_logo-removebg-preview (1) (3).png"
+            alt="MyApp Logo"
+          />
+        </div>
+      </div>
+    </nav>
+    <div class="status-bar">
+      <div class="user-info">
+        <h2>Welcome,<%= userInfo.username %>!</h2>
+        <p><%= userInfo.email %></p>
+        <p>
+          <strong
+            >Balance is: ₹ <%= (userInfo.currentBalance/100).toFixed(2)
+            %></strong
+          >
+        </p>
+      </div>
+      <div>
+        <button class="balance-btn">
+          💰 ₹ <%= (userInfo.currentBalance/100).toFixed(2) %>
+        </button>
+      </div>
+    </div>
+    <hr class="white-line" />
+    <div class="payment-page-heading"><h2>Payments dashboard</h2></div>
+    <div class="payment-container">
+      <h2>Enter recharge Amount</h2>
+      <div class="input-container">
+        <input type="number" placeholder="Enter amount" class="amount-input" />
+      </div>
+      <button class="pay-button">Pay</button>
+      <p class="error-msg"></p>
+    </div>
+    <!-- Popup Container -->
+    <div id="popupOverlay">
+      <div class="popup">
+        <h2 id="popup-title"></h2>
+        <p id="popup-body"></p>
+        <div class="loader"></div>
+        <!-- Loading animation -->
+      </div>
+    </div>
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+    <script src="../js/dashbdPayments.js"></script>
+  </body>
+</html>

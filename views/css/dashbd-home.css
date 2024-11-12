@@ -1,0 +1,673 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: black;
+  background-size: cover; /* Cover the entire viewport */
+  background-position: center; /* Center the background image */
+  background-repeat: no-repeat; /* Prevent the image from repeating */
+  color: white; /* Optional: change text color for better contrast */
+  justify-content: center;
+  align-items: center;
+  height: 100%; /* Full viewport height */
+  box-sizing: border-box;
+  overflow: hidden; /* Prevents any accidental scroll on the entire body */
+}
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+.navbar {
+  top: 0;
+  left: 0;
+  width: 100%; /* Full width */
+  background-color: #333; /* Navbar background color */
+  z-index: 1000; /* Ensure it's above other content */
+}
+
+.navbar-container {
+  display: flex;
+  justify-content: space-between; /* Space between logo and hamburger */
+  align-items: center; /* Center items vertically */
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+.logo {
+  color: white;
+  font-size: 0.3rem;
+  font-weight: bold;
+}
+.logo img {
+  height: 2rem;
+}
+
+.hamburger {
+  display: none; /* Hide hamburger menu by default */
+  flex-direction: column;
+  cursor: pointer;
+}
+
+.line {
+  height: 3px;
+  width: 25px;
+  background-color: white;
+  margin: 3px 0; /* Space between lines */
+}
+
+.nav-list {
+  list-style: none;
+  display: flex; /* Default display for larger screens */
+  margin-top: 0%;
+}
+.nav-list li {
+  margin-top: 4%;
+  margin-bottom: 4%;
+}
+
+.nav-button {
+  position: relative; /* Position relative for the pseudo-elements */
+  color: white; /* Text color */
+  text-decoration: none; /* Remove underline */
+  padding: 15px 20px;
+  overflow: hidden; /* Hide overflow for animation */
+  transition: color 0.3s; /* Smooth transition for text color */
+  margin-top: 1%;
+  margin-bottom: 1%;
+}
+
+.nav-button::after {
+  content: ""; /* Pseudo-element for the underline effect */
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  width: 0;
+  height: 2px;
+  background-color: white; /* Color of the underline */
+  transition: width 0.4s ease, left 0.4s ease; /* Animation for the underline */
+}
+
+.nav-button:hover::after {
+  width: 100%; /* Full width on hover */
+  left: 0; /* Move to the left */
+}
+
+.nav-button:hover {
+  color: #ffd700; /* Change text color on hover */
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+  .nav-list {
+    display: none; /* Hide nav list on small screens */
+    flex-direction: column; /* Stack items vertically */
+    position: absolute;
+    top: 60px; /* Position below the navbar */
+    left: 0;
+    width: 100%; /* Full width */
+    background-color: #333; /* Match navbar background */
+    z-index: 999; /* Above other content */
+  }
+
+  .nav-list.active {
+    display: flex; /* Show nav list when active */
+  }
+
+  .hamburger {
+    display: flex; /* Show hamburger menu */
+    height: 1.2rem;
+  }
+}
+.button-container {
+  text-align: center; /* Center the button container */
+  margin-top: 10%;
+  font-family: "Montserrat", sans-serif; /* Use Montserrat for buttons */
+}
+
+/* css for status bar below*/
+
+/* Status Bar Styling */
+.status-bar {
+  display: flex;
+  align-items: center;
+  background-color: #000;
+  color: #fff;
+  padding: 0.5rem;
+  width: 100%;
+  font-family: Arial, sans-serif;
+}
+
+/* User Info Section */
+.user-info {
+  display: flex;
+  flex-direction: column;
+  margin-left: 0;
+}
+
+.user-info h2 {
+  font-size: 0.9rem;
+  font-weight: bold;
+  margin-bottom: 0.3rem;
+}
+
+.user-info p {
+  font-size: 0.7rem;
+  color: #aaa;
+}
+
+/* User Details Section */
+.user-details {
+  display: flex; /* Enable flexbox layout */
+  justify-content: space-between; /* Distribute space between items */
+  align-items: center; /* Center items vertically */
+  width: 100%; /* Ensure the parent takes full width */
+}
+
+select {
+  border-radius: 4px;
+  color: white;
+  background-color: #444;
+  text-align: center;
+  font-size: 0.8rem;
+}
+.avatar {
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+  margin-left: 1rem;
+  border: 2px solid #fff;
+}
+
+/* Balance Button */
+.balance-btn {
+  background-color: #28a745;
+  color: #fff;
+  font-size: 0.7rem;
+  font-weight: bold;
+  padding: 0.35rem 0.2rem;
+  border: none;
+  border-radius: 0.25rem;
+  align-items: center;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-right: 0.5rem;
+  margin-left: 0.5rem;
+}
+
+.balance-btn:hover {
+  background-color: #218838;
+}
+/* recharge Button */
+.recharge-btn {
+  background-color: #444;
+  color: #fff;
+  font-size: 0.7rem;
+  font-weight: bold;
+  padding: 0.4rem 0.2rem;
+  border: 0.05rem solid white;
+  border-radius: 0.25rem;
+  align-items: center;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-right: 0.5rem;
+  margin-left: 0.5rem;
+}
+
+.recharge-btn:hover {
+  background-color: black;
+}
+/* imp management for non-scroll items:::::::::::: */
+.non-scroll-fixed-div {
+  position: fixed;
+  top: 0; /* Aligns the top div with the top of the page */
+  left: 0; /* Aligns the container to the left side of the page */
+  display: flex;
+  flex-direction: column; /* Stacks boxes vertically */
+  width: 100%; /* Make it full width, or adjust to your preference */
+  z-index: 1000; /* Keeps it on top of other elements */
+}
+/* css for separator line */
+.white-line {
+  border: none;
+  border-top: 2px solid white; /* Adjust thickness as needed */
+  width: 100%; /* Full width */
+  margin: 0%;
+}
+/* css for search bar*/
+.search-box {
+  display: flex;
+  align-items: center;
+  background-color: #222;
+  border-radius: 30px;
+  overflow: hidden;
+  width: 100%;
+  max-width: 800px;
+  padding: 0.1rem 0.5rem;
+  transition: box-shadow 0.3s ease;
+  margin: 0 auto;
+  margin-top: 2%;
+}
+
+.search-box:hover {
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+}
+.search-box button {
+  background-color: transparent; /* Removes background */
+  border: none; /* Removes border */
+  outline: none; /* Removes focus outline */
+  color: inherit; /* Inherits color from parent */
+  font-size: 0.7rem; /* Inherits font size */
+  cursor: pointer; /* Pointer cursor on hover */
+  padding: 0; /* Removes default padding */
+  margin: 0; /* Removes default margin */
+  font-weight: bold;
+}
+
+.upload-btn {
+  background-color: #444;
+  border-radius: 30px;
+  padding: 0.5rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.3s;
+  font-size: 0.7rem;
+  text-align: center;
+}
+
+.upload-btn:hover {
+  background-color: #666;
+}
+
+.send-btn {
+  background-color: green;
+  border-radius: 30px;
+  padding: 0.5rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.3s;
+  font-size: 0.7rem;
+}
+.send-btn:hover {
+  background-color: darkgreen;
+}
+#userQueryInputBox {
+  flex-grow: 1;
+  padding: 0.5rem 1rem;
+  color: #fff;
+  background-color: transparent;
+  border: none;
+  outline: none;
+}
+
+#image-name {
+  color: white;
+  margin-top: 0.5rem;
+  font-size: 0.7rem;
+  text-align: center;
+  margin-bottom: 1%;
+}
+
+/* Responsive Design */
+@media (max-width: 600px) {
+  .search-box {
+    max-width: 96%;
+  }
+
+  #userQueryInputBox {
+    font-size: 0.7rem;
+    padding: 0.5rem;
+  }
+}
+/* css for response box */
+
+.response-container {
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+  background-color: rgba(20, 20, 20, 0.8);
+  border: 1px solid white; /* Thin white border */
+  border-radius: 10px;
+  max-width: 100%;
+  width: 95%; /* fixed width for larger screens...*/
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+  animation: fadeIn 0.5s ease;
+  margin: 1% auto;
+  overflow: hidden;
+}
+
+.content {
+  flex: 1;
+  overflow-y: auto; /* Make it scrollable */
+  padding: 0.1rem;
+  border: 1px solid #444;
+  border-radius: 5px;
+  background-color: rgba(255, 255, 255, 0.1);
+  margin-top: 0.4rem;
+  animation: slideIn 0.5s ease;
+  text-align: left;
+  margin-bottom: 1%;
+  scroll-behavior: smooth;
+}
+
+/* Responsive Design */
+@media (max-width: 600px) {
+  .response-container {
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+    background-color: rgba(20, 20, 20, 0.8);
+    border: 1px solid white; /* Thin white border */
+    border-radius: 10px;
+    max-width: 100%;
+    width: 95%; /* fixed width for larger screens...*/
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+    animation: fadeIn 0.5s ease;
+    margin: 1% auto;
+    overflow: hidden;
+  }
+  .content {
+    flex: 1;
+    overflow-y: auto; /* Make it scrollable */
+    padding: 0.1rem;
+    border: 1px solid #444;
+    border-radius: 5px;
+    background-color: rgba(255, 255, 255, 0.1);
+    margin-top: 0.4rem;
+    animation: slideIn 0.5s ease;
+    text-align: left;
+    margin-bottom: 1%;
+  }
+}
+/* Animation Keyframes */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateY(-10px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+/* css for refresh button*/
+.response-box {
+  display: flex; /* Enable flexbox layout */
+  justify-content: space-between; /* Space items on left and right */
+  align-items: center; /* Center items vertically */
+}
+.response-box h4 {
+  font-size: 1rem;
+}
+.refresh-btn {
+  display: flex;
+  cursor: pointer; /* Change cursor to pointer for the button */
+  background-color: #444;
+  border-radius: 30px;
+  padding: 0.2rem 0.4rem;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.3s;
+  text-align: center;
+}
+
+.refresh-btn:hover {
+  background-color: #666;
+}
+#refreshBtnText {
+  font-size: 0.7rem;
+}
+#conversation-id {
+  margin-top: 1%; /* Space above the conversation ID */
+  text-align: right; /* Align text to the right */
+  font-size: 0.5rem;
+}
+/* styling for the user-response-div and ai-response-div inside the content container */
+
+.chat-container {
+  padding: 2%;
+  display: flex;
+  flex-direction: column;
+  margin: 0.4rem auto;
+
+  width: 80%;
+  h4 {
+    margin: 0;
+    font-size: 0.5rem;
+  }
+
+  p {
+    margin: 5px 0 0 0;
+    font-size: 0.5rem;
+  }
+  .icon {
+    font-size: 0.5rem;
+    margin-right: 15px;
+  }
+}
+
+.user-query,
+.ai-response {
+  display: flex;
+  flex-direction: column; /* Stack items vertically */
+  border-radius: 8px;
+  background-color: white;
+  position: relative; /* Required for absolute positioning of the copy button */
+}
+
+.user-query {
+  background-color: rgba(173, 216, 230, 0.8); /* Light blue for user */
+  margin-right: 0;
+}
+
+.ai-response {
+  background-color: rgba(221, 160, 221, 0.8); /* Light purple for AI */
+  margin-left: 0;
+}
+
+.query-content,
+.response-content {
+  flex-grow: 1;
+}
+
+.cost-info {
+  background-color: #28a745;
+  color: white; /* Button text color */
+  border: none;
+  border-radius: 5px;
+  padding: 0.1rem 0.2rem;
+  font-size: 0.4rem;
+  position: absolute; /* Positioning the button */
+  z-index: 1; /* Ensure it appears above other elements */
+  top: 1%;
+  right: 1%;
+}
+/* Responsive Design */
+@media (max-width: 600px) {
+  .chat-container {
+    padding: 2%; /* Reduce padding on small screens */
+  }
+  .user-query,
+  .ai-response {
+    padding: 2%; /* Smaller padding on smaller screens */
+  }
+}
+/* css for image status para inside the spawn div of user*/
+.image-status-spawn-userDiv {
+  font-size: 0.7rem;
+  color: red;
+}
+/*css for a disbled class to control from the toggleuistate() function from the DOM */
+.disabled {
+  opacity: 0.5;
+  pointer-events: none;
+  cursor: not-allowed;
+}
+/*for popup*/
+/* Popup Overlay */
+#popupOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s, visibility 0.3s;
+  z-index: 1000;
+}
+
+/* Popup Box */
+.popup {
+  position: relative;
+  max-width: 300px;
+  width: 80%;
+  padding: 20px;
+  background: black;
+  border: 0.1rem solid #fff; /* White border */
+  border-radius: 8px;
+  text-align: center;
+  transform: scale(0.8);
+  transition: transform 0.3s;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  animation: slideUp 0.5s ease forwards;
+}
+
+/* Popup Content */
+.popup h2 {
+  margin-bottom: 15px;
+  color: white;
+}
+.popup p {
+  margin-bottom: 20px;
+  color: white;
+}
+/* Loader Spinner */
+.loader {
+  border: 6px solid #f3f3f3; /* Light grey */
+  border-top: 6px solid #3498db; /* Blue */
+  border-radius: 50%;
+  width: 50px; /* Size of the spinner */
+  height: 50px; /* Size of the spinner */
+  animation: spin 1s linear infinite; /* Spin animation */
+  margin: 20px auto; /* Center the spinner */
+  display: hidden;
+}
+
+/* Spin Animation */
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* Animations */
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Show Popup Styles */
+#popupOverlay.show {
+  opacity: 1;
+  visibility: visible;
+}
+.popup.show {
+  transform: scale(1);
+}
+.show {
+  display: block;
+}
+/* style for code and text response formatting */
+.text-block {
+  font-size: 0.5rem;
+}
+
+.code-block {
+  position: relative;
+  margin-top: 0.7rem;
+  margin-bottom: 0.7rem;
+}
+
+.code-header {
+  background-color: #2d2d2d;
+  color: #fff;
+  padding: 0.5rem 1rem;
+  border-radius: 4px 4px 0 0;
+  font-family: monospace;
+  font-size: 0.5rem;
+  position: relative;
+}
+
+.code-content {
+  background-color: black;
+  padding: 0.4rem;
+  border-radius: 0 0 4px 4px;
+  overflow-x: auto;
+  font-family: monospace;
+  white-space: pre;
+  margin: 0;
+  font-size: 0.5rem;
+}
+
+.markdown-header {
+  font-size: 0.5rem;
+  font-weight: bold;
+  color: white;
+  margin-bottom: 0.1rem;
+  margin-top: 0.5rem;
+}
+
+.inline-code {
+  background-color: black;
+  padding: 0.2rem 0.4rem;
+  border-radius: 3px;
+  font-family: monospace;
+  font-size: 0.5em;
+}
+
+.code-copy-btn {
+  position: absolute;
+  right: 10px;
+  top: 5px;
+  background: transparent;
+  border: none;
+  color: white;
+  cursor: pointer;
+  padding: 0.1rem 0.2rem;
+  font-size: 0.4rem;
+}
+
+.code-copy-btn:hover {
+  opacity: 0.8;
+}

@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Zapsolve</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fira+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Raleway:ital,wght@0,100..900;1,100..900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../css/dashbd-home.css" />
+    <!-- Link to your CSS file -->
+  </head>
+  <body>
+    <div class="non-scroll-fixed-div">
+      <nav class="navbar">
+        <div class="navbar-container">
+          <div class="hamburger" id="hamburger">
+            <div class="line"></div>
+            <div class="line"></div>
+            <div class="line"></div>
+          </div>
+          <div class="logo">
+            <img
+              src="../pics/zapsolve.ai_logo-removebg-preview (1) (3).png"
+              alt="MyApp Logo"
+            />
+          </div>
+          <ul class="nav-list" id="nav-list">
+            <li><a href="#" class="nav-button">Home</a></li>
+            <li><a href="#" class="nav-button">About</a></li>
+            <li><a href="#" class="nav-button">Services</a></li>
+            <li><a href="#" class="nav-button">Contact</a></li>
+          </ul>
+        </div>
+      </nav>
+      <div class="status-bar">
+        <div class="user-info">
+          <h2>Welcome,<%= userInfo.username %>!</h2>
+          <p><%= userInfo.email %></p>
+          <p><strong>Balance is: ₹ <%= (userInfo.currentBalance/100).toFixed(2) %></strong></p>
+        </div>
+
+        <div class="user-details">
+          <div> <button class="balance-btn">💰 ₹ <%= (userInfo.currentBalance/100).toFixed(2) %></button>
+            <button class="recharge-btn">Recharge account</button></div>
+          <select id="model-selection">
+            <option value="gpt-4o-mini" selected>Basic model</option>
+          </select>
+        </div>
+      </div>
+      <hr class="white-line" />
+      <div class="search-box">
+        <label for="upload-image" id="upload-btn" class="upload-btn">
+          <input
+            placeholder="Upload"
+            type="file"
+            id="upload-image"
+            accept="image/*"
+            hidden
+          />
+          <h4 id="uploadBtnText">Upload pic here</h4>
+        </label>
+        <textarea
+          id="userQueryInputBox"
+          class=""
+          placeholder="Type here or just upload pic and press send"
+        ></textarea>
+        <label id="send-btn" class="send-btn">
+          <h4>Send</h4>
+        </label>
+      </div>
+      <p id="image-name">No image selected</p>
+      <hr class="white-line" />
+      <!-- Popup Container -->
+      <div id="popupOverlay">
+        <div class="popup">
+          <h2 id="popup-title"></h2>
+          <p id="popup-body"></p>
+          <div class="loader"></div>
+          <!-- Loading animation -->
+        </div>
+      </div>
+      <div class="response-container">
+        <div class="response-box">
+          <h4>Response Box:</h4>
+          <label id="refresh-btn" class="refresh-btn">
+            <h4 id="refreshBtnText">Refresh conversation</h4>
+          </label>
+        </div>
+        <p style="display:none;"conversation-id">Conversation-id: 12213131343434</p>
+        <div class="content"></div>
+        <p id="warningmsg"></p>
+      </div>
+    </div>
+    <script defer type="module" src="../js/dashbd-home.js"></script>
+  </body>
+</html>
