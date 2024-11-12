@@ -130,7 +130,6 @@ async function postPaymentHandler(object) {
   if (verificationStatus.status === "success") {
     paymentDetails.isVerified = true;
   }
-  console.log("the paymentDetails obj sent to backedn is", paymentDetails);
   const dbUpdate = await updatepaymentToDB(paymentDetails);
   let finalmsgStatus = "failure";
   if (

@@ -218,7 +218,6 @@ async function requestHandler() {
         });
       }
     } catch (error) {
-      console.error("Error sending data:", error);
       divSpawner("ai", {
         aiResponse:
           "An error occured in generating the response!!!, pls try again.",
@@ -280,7 +279,7 @@ async function divSpawner(spawnDivName, data) {
             button.textContent = "📋 Copy";
           }, 2000);
         } catch (err) {
-          console.error("Failed to copy code:", err);
+          // console.error("Failed to copy code:", err);
         }
       });
     });

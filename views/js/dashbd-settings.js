@@ -19,6 +19,6 @@ async function updateSelectedModel() {
       //also reset the
     }
   } catch (error) {
-    console.error("Error updating model:", error);
+    // console.error("Error updating model:", error);
   }
 }

@@ -26,7 +26,6 @@ async function googleAuthRequestHandler() {
     });
     const newResponse = await response.json();
     if (response.ok && newResponse.success === true) {
-      console.log("redirecting to dashboad!!!!");
       window.location.href = "/dashbd/home";
     } else {
       popupTitle.innerHTML = "Oops!!! Server error occured.Pls try again later";
