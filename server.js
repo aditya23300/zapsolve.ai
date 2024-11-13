@@ -39,6 +39,7 @@ app.get("/", (req, res) => {
 });
 // Route handler for the oauthsignin:::::::::::::::::::::::::::::
 app.post("/postGoogleSignInRoute", async (req, res) => {
+  console.log("request received on postGoogleSignInRoute");
   //update cloudstoredb of user ---> set cookies here ----> send back the status along with a status code
   const userInfo = req.body;
   try {
@@ -57,11 +58,13 @@ app.post("/postGoogleSignInRoute", async (req, res) => {
       res.cookie("token", token);
       res.status(200).json({ success: true });
     } else {
+      console.log("error1 in postgooglesignroute");
       res
         .status(400)
         .json({ success: false, message: "Something went wrong", error });
     }
   } catch (error) {
+    console.log("error2 in postgooglesignroute in catch block", error);
     res
       .status(400)
       .json({ success: false, message: "Something went wrong", error });
