@@ -216,8 +216,16 @@ select {
   transition: background-color 0.3s ease;
   margin-right: 0.5rem;
   margin-left: 0.5rem;
+  margin-top: 8%;
 }
-
+@media (max-width: 600px) {
+  .recharge-btn {
+    padding: 0.2rem 0.1rem;
+  }
+  .balance-btn {
+    padding: 0.2rem 0.1rem;
+  }
+}
 .recharge-btn:hover {
   background-color: black;
 }
@@ -246,7 +254,6 @@ select {
   border-radius: 30px;
   overflow: hidden;
   width: 100%;
-  max-width: 800px;
   padding: 0.1rem 0.5rem;
   transition: box-shadow 0.3s ease;
   margin: 0 auto;

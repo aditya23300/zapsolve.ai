@@ -28,7 +28,7 @@ async function postGoogleSignInRouteHandler(userInfo) {
         uid: userInfo.uid,
         conversationArray: [],
         paymentHistoryArray: [],
-        currentBalance: 0,
+        currentBalance: 500,
         totalCost: 0,
       });
       if (setDetails.status === "success")
@@ -67,45 +67,60 @@ async function imageToBase64Stringconverter(image) {
 }
 async function aiQueryRequestHandler(userQuery, uid) {
   try {
-    //if image input is provided then convert the image to base64string
-    if (Object.keys(userQuery.image).length > 0) {
-      userQuery.image.file = await imageToBase64Stringconverter(
-        userQuery.image.file
-      );
-    }
-    //performing api call to the open-ai services and getting the response
-    const apiResponse = await createNewConversationforOPENAI(userQuery);
-    if (apiResponse.status === "success") {
-      const conversationObj = apiResponse.conversationObj;
-      //now,we have to upload the conversationobj to the db
-      const userRef = db.collection("users").doc(uid);
-      //calculate the new current balance and cost values for db
-      // Fetch the document snapshot
-      const userDoc = await userRef.get();
-      const newCurrentBalance = parseFloat(
-        (
-          userDoc.data().currentBalance - conversationObj.cost.totalCost
-        ).toFixed(4)
-      );
-      const newTotalCost = parseFloat(
-        (userDoc.data().totalCost + conversationObj.cost.totalCost).toFixed(4)
-      );
-      const dbUpdate = await CRUDFirestoreDB("update", uid, {
-        conversationArray: FieldValue.arrayUnion(conversationObj),
-        currentBalance: newCurrentBalance,
-        totalCost: newTotalCost,
-      });
-      if (dbUpdate.status === "success") {
-        const responseObj = {
-          aiResponse: conversationObj.aiResponse,
-          cost: conversationObj.cost.totalCost,
+    //first ensure that the currentBalance of the user is >0, else just return a failed message with the reason.
+    const userRef = db.collection("users").doc(uid);
+    const userDoc = await userRef.get();
+    const curBal = userDoc.data().currentBalance; //this current balance is in paise so rem that
+    if (curBal > 0) {
+      //paste here
+      if (Object.keys(userQuery.image).length > 0) {
+        //if image input is provided then convert the image to base64string
+        userQuery.image.file = await imageToBase64Stringconverter(
+          userQuery.image.file
+        );
+      }
+      //performing api call to the open-ai services and getting the response
+      const apiResponse = await createNewConversationforOPENAI(userQuery);
+      if (apiResponse.status === "success") {
+        const conversationObj = apiResponse.conversationObj;
+        //now,we have to upload the conversationobj to the db
+        //calculate the new current balance and cost values for db
+        const newCurrentBalance = parseFloat(
+          (curBal - conversationObj.cost.totalCost).toFixed(4)
+        );
+        const newTotalCost = parseFloat(
+          (userDoc.data().totalCost + conversationObj.cost.totalCost).toFixed(4)
+        );
+        const dbUpdate = await CRUDFirestoreDB("update", uid, {
+          conversationArray: FieldValue.arrayUnion(conversationObj),
           currentBalance: newCurrentBalance,
-        };
-        //now,return a reponseobj which contains only the ai-response,cost,current balance.
-        return { status: "success", responseObj };
-      } else return { status: "failed", message: "failed to update the db" };
+          totalCost: newTotalCost,
+        });
+        if (dbUpdate.status === "success") {
+          const responseObj = {
+            aiResponse: conversationObj.aiResponse,
+            cost: conversationObj.cost.totalCost,
+            currentBalance: newCurrentBalance,
+          };
+          //now,return a reponseobj which contains only the ai-response,cost,current balance.
+          return { status: "success", responseObj };
+        } else return { status: "failed", message: "failed to update the db" };
+      } else {
+        return apiResponse;
+      }
     } else {
-      return apiResponse;
+      return {
+        status: "success",
+        responseObj: {
+          aiResponse: `Your current account balance is ₹ ${(
+            curBal / 100
+          ).toFixed(
+            2
+          )} which is too low to process any request ,pls recharge your account to continue!!!`,
+          cost: 0,
+          currentBalance: curBal, //in paise
+        },
+      };
     }
   } catch (error) {
     console.error(error);

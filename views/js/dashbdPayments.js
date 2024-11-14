@@ -7,6 +7,10 @@ document.addEventListener("DOMContentLoaded", function () {
     await paymentRequestHandler();
     sendBtn.disabled = false;
   });
+  //event listener for home button
+  document.querySelector(".home-btn").addEventListener("click", function () {
+    window.location.href = "/dashbd/home";
+  });
 });
 //function definiton starts here...
 async function paymentRequestHandler() {

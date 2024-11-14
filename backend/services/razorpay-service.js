@@ -64,5 +64,3 @@ function amountChecker(amount) {
   return isValid;
 }
 module.exports = { verifyPayment, createOrder };
-
-//async function postPaymentHandler()

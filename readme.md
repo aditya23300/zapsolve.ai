@@ -13,7 +13,7 @@ services::::::::::::
    So, turn off access of client to db,storage,auth from the security rules.
 
 7. designed with phone screen on focus.
-   ---->
+   ----------------------->
    update:
    each user has 4 credentials:
    username
@@ -22,3 +22,11 @@ services::::::::::::
    uid
    now, the email,uid are permanent and cant change for an accout but the username,photourl can be changed by the user from his google account.
    so only use email for performing any action or identifying any specific user its like a primary key amidst the chaos of data inconsistency happening constantly.
+
+//------------------------>
+process to use vim text editor in the console to comment multiline messages while commiting
+step-1: write git commit instead of git commit -m ""
+step-2: vim will open up ,,, use # before lines you want to add as comments but write without the '#'
+If you're using Vim, to save the commit message and exit:
+Press Esc to make sure you're in normal mode.
+Type :wq and press Enter to save and commit.

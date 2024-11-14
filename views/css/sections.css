@@ -1,0 +1,194 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: black;
+  background-size: cover; /* Cover the entire viewport */
+  background-position: center; /* Center the background image */
+  background-repeat: no-repeat; /* Prevent the image from repeating */
+  color: white; /* Optional: change text color for better contrast */
+  justify-content: center;
+  align-items: center;
+  height: 100vh; /* Full viewport height */
+  overflow: hidden; /* Prevent scrolling */
+}
+
+.navbar {
+  position: fixed; /* Keep the navbar at the top */
+  top: 0;
+  left: 0;
+  width: 100%; /* Full width */
+  background-color: #333; /* Navbar background color */
+  z-index: 1000; /* Ensure it's above other content */
+}
+
+.navbar-container {
+  display: flex;
+  justify-content: space-between; /* Space between logo and hamburger */
+  align-items: center; /* Center items vertically */
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+.logo {
+  color: white;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.hamburger {
+  display: none; /* Hide hamburger menu by default */
+  flex-direction: column;
+  cursor: pointer;
+}
+
+.line {
+  height: 3px;
+  width: 25px;
+  background-color: white;
+  margin: 3px 0; /* Space between lines */
+}
+
+.nav-list {
+  list-style: none;
+  display: flex; /* Default display for larger screens */
+  margin-top: 0%;
+}
+.nav-list li {
+  margin-top: 4%;
+  margin-bottom: 4%;
+}
+
+.nav-button {
+  position: relative; /* Position relative for the pseudo-elements */
+  color: white; /* Text color */
+  text-decoration: none; /* Remove underline */
+  padding: 15px 20px;
+  overflow: hidden; /* Hide overflow for animation */
+  transition: color 0.3s; /* Smooth transition for text color */
+  margin-top: 1%;
+  margin-bottom: 1%;
+}
+
+.nav-button::after {
+  content: ""; /* Pseudo-element for the underline effect */
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  width: 0;
+  height: 2px;
+  background-color: white; /* Color of the underline */
+  transition: width 0.4s ease, left 0.4s ease; /* Animation for the underline */
+}
+
+.nav-button:hover::after {
+  width: 100%; /* Full width on hover */
+  left: 0; /* Move to the left */
+}
+
+.nav-button:hover {
+  color: #ffd700; /* Change text color on hover */
+}
+
+.content {
+  text-align: center;
+  font-family: "Raleway", sans-serif; /* Use Raleway for paragraphs */
+  padding-top: 20%;
+  font-size: 0.9rem;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+  .nav-list {
+    display: none; /* Hide nav list on small screens */
+    flex-direction: column; /* Stack items vertically */
+    position: absolute;
+    top: 60px; /* Position below the navbar */
+    left: 0;
+    width: 100%; /* Full width */
+    background-color: #333; /* Match navbar background */
+    z-index: 999; /* Above other content */
+  }
+
+  .nav-list.active {
+    display: flex; /* Show nav list when active */
+  }
+
+  .hamburger {
+    display: flex; /* Show hamburger menu */
+  }
+}
+.payment-page-heading {
+  align-items: center;
+  margin: 2% auto;
+  width: 80%;
+  text-align: center;
+}
+.payment-page-heading h2 {
+  border: 0.05rem solid white; /* Green border */
+  padding: 10px;
+  border-radius: 8px;
+  box-shadow: 2px 2px 8px rgba(255, 255, 255, 0.3); /* Lighter shadow with white color */
+  color: white; /* Text color to ensure it’s visible on black background */
+}
+/* Payment container styling */
+.payment-container {
+  text-align: center;
+  padding: 1rem;
+  border-radius: 10px;
+  width: 85%;
+  max-width: 400px;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(8px);
+  box-shadow: 0 4px 20px rgba(255, 255, 255, 0.2);
+  transition: transform 0.3s ease;
+  margin: 5% auto;
+}
+
+.payment-container:hover {
+  transform: translateY(-5px);
+}
+.payment-container h2 {
+  font-size: 1rem;
+}
+/* Input styling */
+.input-container {
+  margin: 20px 0;
+}
+/* Pay button styling */
+.pay-button {
+  width: 100%;
+  padding: 15px;
+  font-size: 1rem;
+  color: #fff;
+  background-color: #ff6347;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.3s ease;
+}
+
+.pay-button:hover {
+  background-color: #ff4500;
+  transform: translateY(-3px);
+}
+
+.pay-button:active {
+  transform: scale(0.98);
+}
+/* Responsive design */
+@media (max-width: 500px) {
+  .payment-container {
+    width: 85%;
+    padding: 15px;
+  }
+
+  .pay-button {
+    font-size: 0.7rem;
+    padding: 12px;
+  }
+}

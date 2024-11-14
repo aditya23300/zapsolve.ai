@@ -44,7 +44,6 @@ async function googleAuthRequestHandler() {
     }, 2000);
   }
 }
-//work here
 document.addEventListener("DOMContentLoaded", function () {
   // Get the hamburger menu and nav list elements
   const hamburger = document.getElementById("hamburger");
@@ -56,5 +55,7 @@ document.addEventListener("DOMContentLoaded", function () {
   });
   //event listerner for get started button
   const getStartedBtn = document.getElementById("getStartedBtn");
-  getStartedBtn.addEventListener("click", () => googleAuthRequestHandler());
+  getStartedBtn.addEventListener("click", async () => {
+    await googleAuthRequestHandler();
+  });
 });

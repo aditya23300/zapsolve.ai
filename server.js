@@ -161,6 +161,25 @@ app.post("/api/updatePaymentDetails", authMiddleware, async (req, res) => {
     res.json({ status: "failed", message: error });
   }
 });
+app.get("/about", (req, res) => {
+  res.sendFile(path.join(__dirname, "views/html", "about.html"));
+});
+app.get("/services", (req, res) => {
+  res.sendFile(path.join(__dirname, "views/html", "services.html"));
+});
+app.get("/contact-us", (req, res) => {
+  res.sendFile(path.join(__dirname, "views/html", "contact-us.html"));
+});
+app.get("/home", (req, res) => {
+  res.sendFile(path.join(__dirname, "views/html", "index.html"));
+});
+app.get("/logout", authMiddleware, (req, res) => {
+  Object.keys(req.cookies).forEach((cookieName) => {
+    res.clearCookie(cookieName);
+  });
+  res.redirect("/");
+});
+
 // Start the server
 app.listen(process.env.PORT, () => {
   console.log(`Server is running on ${process.env.PORT}`);
