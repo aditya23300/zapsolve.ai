@@ -18,7 +18,7 @@ body {
 }
 
 .navbar {
-  position: fixed; /* Keep the navbar at the top */
+  position: block; /* Keep the navbar at the top */
   top: 0;
   left: 0;
   width: 100%; /* Full width */
@@ -95,10 +95,10 @@ body {
 }
 
 .content {
-  padding-top: 70px; /* Prevent content from hiding behind the navbar */
+  padding-top: 2%;
   text-align: center;
   font-family: "Raleway", sans-serif; /* Use Raleway for paragraphs */
-  margin-top: 30%;
+  margin-top: 4%;
   font-size: 0.9rem;
 }
 
@@ -122,10 +122,13 @@ body {
   .hamburger {
     display: flex; /* Show hamburger menu */
   }
+  .content {
+    margin-top: 12%;
+  }
 }
 .button-container {
   text-align: center; /* Center the button container */
-  margin-top: 10%;
+  margin-top: 6%;
   font-family: "Montserrat", sans-serif; /* Use Montserrat for buttons */
 }
 
